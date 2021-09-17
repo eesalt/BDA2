@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
+from sklearn.metrics import accuracy_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
@@ -110,7 +111,9 @@ def main():
     )
     Ada_pipe.fit(x_orig, y)
     Ada_prediction = Ada_pipe.predict(x_orig)
-    print(f"AdaBoost Predictions: {Ada_prediction}")
+    # print(f"AdaBoost Predictions: {Ada_prediction}")
+    acc = accuracy_score(y, Ada_prediction)
+    print(f"AdaBoost accuracy: {acc}")
     return
 
 
