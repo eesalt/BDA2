@@ -10,7 +10,7 @@ CREATE INDEX game_id ON batter_counts(game_id);
 CREATE TABLE batter_ba as
 SELECT a.batter,
        CASE WHEN sum(a.atBat)>0 THEN
-       format(sum(a.Hit) / sum(a.atBat),3)
+       round(sum(a.Hit) / sum(a.atBat),3)
            ELSE NULL END as Batting_Average
 from batter_counts a
 group by a.batter;
@@ -20,7 +20,7 @@ CREATE TABLE batter_annual_ba as
 SELECT a.batter,
        year(b.local_date)        as YEAR,
        CASE WHEN sum(a.atBat) > 0 THEN
-       format(sum(a.Hit) / sum(a.atBat),3)
+       round(sum(a.Hit) / sum(a.atBat),3)
            ELSE NULL END as Batting_Average
 from batter_counts a,
      game b
@@ -40,7 +40,7 @@ CREATE TABLE batter_100_day_ba as
 SELECT a.game_id,
        a.batter,
        CASE WHEN sum(c.atBat) > 0 THEN
-       format(sum(c.Hit) / sum(c.atBat), 3)
+       round(sum(c.Hit) / sum(c.atBat), 3)
            ELSE NULL END as 100_Day_Batting_Average
 from batter_counts a,
      game b,
