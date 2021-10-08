@@ -36,6 +36,7 @@ order by 1, 2;
 # this assumes that the game_ids are in sequential order.
 # Normally I wouldn't do that but the performance was so bad I had to
 # See below for my preferred method
+
 CREATE TABLE batter_100_day_ba as
 SELECT a.game_id,
        a.batter,
