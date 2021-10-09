@@ -1,7 +1,10 @@
 import sys
 
+from calculate_batting_average import CalculateBattingAverage
 from pyspark import StorageLevel
+from pyspark.ml import Pipeline
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import round
 
 
 def main():
@@ -39,9 +42,8 @@ def main():
     query = """
     SELECT a.game_id,
            a.batter,
-           CASE WHEN sum(c.atBat) > 0 THEN
-           round(sum(c.Hit) / sum(c.atBat), 3)
-               ELSE NULL END as 100_Day_Batting_Average
+           sum(c.atBat) at_Bats,
+           sum(c.Hit) hits
     from batter_counts a,
          batter_counts c,
          (SELECT a.game_id, b.game_id as prior_game
@@ -56,7 +58,17 @@ def main():
              a.game_id"""
 
     results_df = spark.sql(query)
-    results_df.show()
+
+    CalcBattAvg = CalculateBattingAverage(
+        inputCols=["at_Bats", "hits"], outputCol="batting_average"
+    )
+    pipeline = Pipeline(stages=[CalcBattAvg])
+    model = pipeline.fit(results_df)
+    batting_average_df = model.transform(results_df)
+    rounded_ba_df = batting_average_df.withColumn(
+        "Rounded_Batting_Avg", round(batting_average_df["batting_average"], 3)
+    )
+    rounded_ba_df.show()
 
     return
 
