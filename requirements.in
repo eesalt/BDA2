@@ -4,3 +4,4 @@ mariadb
 sqlalchemy
 plotly
 sklearn
+pyspark
