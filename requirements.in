@@ -5,3 +5,5 @@ sqlalchemy
 plotly
 sklearn
 pyspark
+statsmodels
+openpyxl
