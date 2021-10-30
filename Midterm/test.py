@@ -23,13 +23,13 @@ def main():
     print(os.getcwd())
 
     # testing data only
-    names = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Class"]
-    df = pd.read_csv("iris.data", names=names)
-    df["boo_response"] = df["Class"].apply(
-        lambda x: True if x == "Iris-setosa" else False
-    )
-    predictors = ["Sepal Length", "Sepal Width", "Class"]
-    response = "Petal Length"
+    # names = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Class"]
+    # df = pd.read_csv("iris.data", names=names)
+    # df["boo_response"] = df["Class"].apply(
+    #    lambda x: True if x == "Iris-setosa" else False
+    # )
+    # predictors = ["Sepal Length", "Sepal Width", "Class"]
+    # response = "Petal Length"
 
     test = charts.create_charts(df=df, predictors=predictors, response=response)
 
