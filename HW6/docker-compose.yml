@@ -3,8 +3,8 @@
 version: "3.3"
 services:
 
-  hw2:
-    container_name: hw2
+  python:
+    container_name: python
     depends_on:
       - db-service
     build:
