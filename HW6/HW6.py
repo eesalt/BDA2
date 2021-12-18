@@ -454,6 +454,24 @@ def main():
     print(forest_df)
     print()
 
+    # testing
+    # thanks! https://stackoverflow.com/questions/31324218
+    CM = confusion_matrix(y_test, forest_prediction)
+
+    TN = CM[0][0]
+    FN = CM[1][0]
+    TP = CM[1][1]
+    FP = CM[0][1]
+
+    print("random forest stats:")
+    print(f"TN:{TN}")
+    print(f"FN:{FN}")
+    print(f"TP:{TP}")
+    print(f"FP:{FP}")
+    print(f"TPR:{TP/(TP+FN)}")
+    print(f"TNR:{TN / (TN + FP)}")
+    print()
+
     # random forest predict probability
     # for_prediction = forest.predict_proba(x_test)
     # split_value = .5
@@ -493,6 +511,21 @@ def main():
     )
     print("adaboost confusion matrix:")
     print(adaboost_df)
+    print()
+    CM = confusion_matrix(y_test, adaboost_prediction)
+
+    TN = CM[0][0]
+    FN = CM[1][0]
+    TP = CM[1][1]
+    FP = CM[0][1]
+
+    print("adaboost stats:")
+    print(f"TN:{TN}")
+    print(f"FN:{FN}")
+    print(f"TP:{TP}")
+    print(f"FP:{FP}")
+    print(f"TPR:{TP/(TP + FN)}")
+    print(f"TNR:{TN / (TN + FP)}")
     print()
 
     # logreg = LogisticRegression()
